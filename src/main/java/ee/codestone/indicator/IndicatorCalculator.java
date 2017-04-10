@@ -49,6 +49,21 @@ public class IndicatorCalculator {
             case SD:
                 indicatorLogic = new StandardDeviationIndicatorLogic(params);
                 break;
+            case ATR:
+                indicatorLogic = new AverageTrueRangeIndicatorLogic(params);
+                break;
+            case ADX:
+                indicatorLogic = new AverageDirectionalIndexIndicatorLogic(params);
+                break;
+            case AO:
+                indicatorLogic = new AwesomeOscillatorIndicatorLogic(params);
+                break;
+            case GER:
+                indicatorLogic = new GrimesEfficiencyRatioIndicatorLogic(params);
+                break;
+            case RSI:
+                indicatorLogic = new RelativeStrengthIndexIndicatorLogic(params);
+                break;
             case PRICE:
                 indicatorLogic = new PriceIndicatorLogic(params);
                 break;

@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public abstract class IndicatorLogic {
 
-    private static final Integer DEFAULT_PRECISION = 20;
+    private static final Integer DEFAULT_PRECISION = 6;
 
     private Integer groupId;
 
