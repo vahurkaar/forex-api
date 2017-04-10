@@ -18,14 +18,23 @@ import java.util.Map;
  */
 public class IndicatorCalculator {
 
+    private static final Integer DEFAULT_PRECISION = 6;
+
     private Collection<IndicatorLogic> indicatorLogics = new ArrayList<>();
 
+    private Integer precision;
+
     public IndicatorCalculator(List<IndicatorDefinition> indicatorParams) {
+        this(indicatorParams, DEFAULT_PRECISION);
+    }
+
+    public IndicatorCalculator(List<IndicatorDefinition> indicatorParams, Integer precision) {
         indicatorParams.forEach(
                 param -> indicatorLogics.add(resolveIndicatorLogic(param.getIndicatorType(), param.getParams(), param.getGroupId()))
         );
         // Always add price
         indicatorLogics.add(resolveIndicatorLogic(IndicatorType.PRICE, null, 0));
+        this.precision = precision;
     }
 
     private IndicatorLogic resolveIndicatorLogic(IndicatorType indicator, Map<String, BigDecimal> params, Integer groupId) {
@@ -82,7 +91,7 @@ public class IndicatorCalculator {
     public ChartData calculate(PriceData priceData, boolean recalculate) {
         List<IndicatorValue> calculatedIndicators = new ArrayList<>();
         indicatorLogics.forEach(indicatorLogic -> calculatedIndicators.add(
-                new IndicatorValue(indicatorLogic.getType(), indicatorLogic.getGroupId(), indicatorLogic.calculate(priceData, recalculate))));
+                new IndicatorValue(indicatorLogic.getType(), indicatorLogic.getGroupId(), indicatorLogic.calculate(priceData, precision, recalculate))));
 
         return new ChartData(priceData, calculatedIndicators);
     }
