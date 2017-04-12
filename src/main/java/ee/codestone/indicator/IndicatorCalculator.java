@@ -20,6 +20,8 @@ public class IndicatorCalculator {
 
     private static final Integer DEFAULT_PRECISION = 6;
 
+    private List<IndicatorDefinition> indicators;
+
     private Collection<IndicatorLogic> indicatorLogics = new ArrayList<>();
 
     private Integer precision;
@@ -29,6 +31,7 @@ public class IndicatorCalculator {
     }
 
     public IndicatorCalculator(List<IndicatorDefinition> indicatorParams, Integer precision) {
+        this.indicators = indicatorParams;
         indicatorParams.forEach(
                 param -> indicatorLogics.add(resolveIndicatorLogic(param.getIndicatorType(), param.getParams(), param.getGroupId()))
         );
@@ -96,5 +99,7 @@ public class IndicatorCalculator {
         return new ChartData(priceData, calculatedIndicators);
     }
 
-
+    public List<IndicatorDefinition> getIndicators() {
+        return indicators;
+    }
 }
