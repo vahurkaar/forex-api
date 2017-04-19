@@ -15,6 +15,10 @@ public class ChartData {
     private List<IndicatorValue> indicators;
     private Map<String, BigDecimal> markers;
 
+    public ChartData(PriceData priceData) {
+        this.priceData = priceData;
+    }
+
     public ChartData(PriceData priceData, List<IndicatorValue> indicators, Map<String, BigDecimal> markers) {
         this.priceData = priceData;
         this.indicators = indicators;
