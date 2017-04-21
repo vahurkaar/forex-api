@@ -6,6 +6,6 @@ package ee.codestone.model.type;
  */
 public enum IndicatorType {
 
-    PRICE, SMA, EMA, EMA_HIGH, EMA_LOW, RSI, BB, AO, SD, GER, ATR, ADX
+    PRICE, SMA, EMA, EMA_HIGH, EMA_LOW, RSI, BB, AO, SD, GER, ATR, ADX, MOMENTUM
 
 }

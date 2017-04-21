@@ -79,6 +79,9 @@ public class IndicatorCalculator {
             case PRICE:
                 indicatorLogic = new PriceIndicatorLogic(params);
                 break;
+            case MOMENTUM:
+                indicatorLogic = new MomentumIndicatorLogic(params);
+                break;
             default:
                 return null;
         }
