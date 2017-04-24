@@ -27,6 +27,8 @@ public class PriceData implements Serializable {
     private BigDecimal low;
     private BigDecimal open;
     private BigDecimal close;
+    private BigDecimal volume;
+    private BigDecimal quoteVolume;
 
     public Timestamp getDate() {
         return date;
@@ -68,6 +70,22 @@ public class PriceData implements Serializable {
         this.close = close;
     }
 
+    public BigDecimal getVolume() {
+        return volume;
+    }
+
+    public void setVolume(BigDecimal volume) {
+        this.volume = volume;
+    }
+
+    public BigDecimal getQuoteVolume() {
+        return quoteVolume;
+    }
+
+    public void setQuoteVolume(BigDecimal quoteVolume) {
+        this.quoteVolume = quoteVolume;
+    }
+
     @Override
     public String toString() {
         return "PriceData{" +
@@ -76,6 +94,8 @@ public class PriceData implements Serializable {
                 ", low=" + low +
                 ", open=" + open +
                 ", close=" + close +
+                ", volume=" + volume +
+                ", quoteVolume=" + quoteVolume +
                 '}';
     }
 }

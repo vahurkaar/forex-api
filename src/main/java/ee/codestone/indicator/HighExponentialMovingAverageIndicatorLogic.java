@@ -22,7 +22,7 @@ public class HighExponentialMovingAverageIndicatorLogic extends ExponentialMovin
     }
 
     @Override
-    protected BigDecimal getValue(PriceData priceData) {
+    protected BigDecimal getValue(PriceData priceData, Integer precision) {
         return priceData.getHigh();
     }
 }

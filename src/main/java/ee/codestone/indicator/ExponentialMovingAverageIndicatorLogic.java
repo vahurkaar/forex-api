@@ -41,7 +41,7 @@ public class ExponentialMovingAverageIndicatorLogic extends SimpleMovingAverageI
 
         BigDecimal multiplier = BigDecimal.valueOf(2).divide(BigDecimal.valueOf(period).add(BigDecimal.ONE),
                 precision, BigDecimal.ROUND_HALF_UP);
-        BigDecimal resultValue = priceData.getClose().subtract(previous).multiply(multiplier).add(previous)
+        BigDecimal resultValue = getValue(priceData, precision, recalculate).subtract(previous).multiply(multiplier).add(previous)
                 .setScale(precision, BigDecimal.ROUND_HALF_UP);
         previous = resultValue;
 

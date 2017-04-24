@@ -56,7 +56,7 @@ public class AwesomeOscillatorIndicatorLogic extends IndicatorLogic {
         }
 
         @Override
-        protected BigDecimal getValue(PriceData priceData) {
+        protected BigDecimal getValue(PriceData priceData, Integer precision) {
             return priceData.getHigh().add(priceData.getLow()).divide(new BigDecimal(2));
         }
     }

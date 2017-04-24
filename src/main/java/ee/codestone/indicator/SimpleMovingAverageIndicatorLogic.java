@@ -50,13 +50,19 @@ public class SimpleMovingAverageIndicatorLogic extends IndicatorLogic {
         }
 
         for (PriceData priceHistory : history) {
-            value = value.add(getValue(priceHistory));
+            BigDecimal calculateValue = getValue(priceHistory, precision);
+            if (calculateValue == null) return null;
+            value = value.add(calculateValue);
         }
 
         return value.divide(BigDecimal.valueOf(period), precision, BigDecimal.ROUND_HALF_UP);
     }
 
-    protected BigDecimal getValue(PriceData priceData) {
+    protected BigDecimal getValue(PriceData priceData, Integer precision) {
+        return getValue(priceData, precision, false);
+    }
+
+    protected BigDecimal getValue(PriceData priceData, Integer precision, boolean recalculate) {
         return priceData.getClose();
     }
 

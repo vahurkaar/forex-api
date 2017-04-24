@@ -22,7 +22,7 @@ public class LowExponentialMovingAverageIndicatorLogic extends ExponentialMoving
     }
 
     @Override
-    protected BigDecimal getValue(PriceData priceData) {
+    protected BigDecimal getValue(PriceData priceData, Integer precision) {
         return priceData.getLow();
     }
 }

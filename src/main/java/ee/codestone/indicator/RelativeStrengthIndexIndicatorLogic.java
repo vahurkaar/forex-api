@@ -71,7 +71,8 @@ public class RelativeStrengthIndexIndicatorLogic extends IndicatorLogic {
 
         BigDecimal resultValue = null;
         if (averageGain != null && averageLoss != null) {
-            BigDecimal relativeStrength = averageGain.divide(averageLoss, precision * 2, BigDecimal.ROUND_HALF_UP);
+            BigDecimal relativeStrength = averageLoss.compareTo(BigDecimal.ZERO) > 0 ?
+                    averageGain.divide(averageLoss, precision * 2, BigDecimal.ROUND_HALF_UP) : BigDecimal.ZERO;
             resultValue = BigDecimal.valueOf(100).subtract(
                     BigDecimal.valueOf(100).divide(
                             BigDecimal.ONE.add(relativeStrength), precision, BigDecimal.ROUND_HALF_UP

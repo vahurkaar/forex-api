@@ -12,12 +12,15 @@ import java.util.Map;
  * @author Vahur Kaar (<a href="mailto:vahur.kaar@tieto.com">vahur.kaar@tieto.com</a>)
  * @since 21.04.2017.
  */
-public class MomentumIndicatorLogic extends SimpleMovingAverageIndicatorLogic {
+public class MomentumIndicatorLogic extends ExponentialMovingAverageIndicatorLogic {
+
+    private BigDecimal depth;
 
     private LinkedList<PriceData> history = new LinkedList<>();
 
     public MomentumIndicatorLogic(Map<String, BigDecimal> params) {
         super(params);
+        this.depth = params.get("depth");
     }
 
     @Override
@@ -26,17 +29,14 @@ public class MomentumIndicatorLogic extends SimpleMovingAverageIndicatorLogic {
     }
 
     @Override
-    public Map<String, BigDecimal> calculate(PriceData priceData, Integer precision, boolean recalculate) {
-        Map<String, BigDecimal> result = new HashMap<>();
-
+    protected BigDecimal getValue(PriceData priceData, Integer precision, boolean recalculate) {
         if (recalculate) history.pollLast();
         history.addLast(priceData);
-        if (history.size() > period) {
+        if (history.size() > depth.intValue()) {
             history.pollFirst();
         }
 
-        result.put("value", calculateValue());
-        return result;
+        return calculateValue();
     }
 
     private BigDecimal calculateValue() {

@@ -35,8 +35,9 @@ public class IndicatorCalculator {
         indicatorParams.forEach(
                 param -> indicatorLogics.add(resolveIndicatorLogic(param.getIndicatorType(), param.getParams(), param.getGroupId()))
         );
-        // Always add price
+        // Always add price and volume
         indicatorLogics.add(resolveIndicatorLogic(IndicatorType.PRICE, null, 0));
+        indicatorLogics.add(resolveIndicatorLogic(IndicatorType.VOLUME, null, 0));
         this.precision = precision;
     }
 
@@ -54,6 +55,9 @@ public class IndicatorCalculator {
                 break;
             case EMA_LOW:
                 indicatorLogic = new LowExponentialMovingAverageIndicatorLogic(params);
+                break;
+            case EMA_RSI:
+                indicatorLogic = new RSIExponentialMovingAverageIndicatorLogic(params);
                 break;
             case BB:
                 indicatorLogic = new BollingerBandsIndicatorLogic(params);
@@ -78,6 +82,9 @@ public class IndicatorCalculator {
                 break;
             case PRICE:
                 indicatorLogic = new PriceIndicatorLogic(params);
+                break;
+            case VOLUME:
+                indicatorLogic = new VolumeIndicatorLogic(params);
                 break;
             case MOMENTUM:
                 indicatorLogic = new MomentumIndicatorLogic(params);
