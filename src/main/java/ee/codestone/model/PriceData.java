@@ -29,6 +29,7 @@ public class PriceData implements Serializable {
     private BigDecimal close;
     private BigDecimal volume;
     private BigDecimal quoteVolume;
+    private Integer candlePeriod;
 
     public Timestamp getDate() {
         return date;
@@ -84,6 +85,14 @@ public class PriceData implements Serializable {
 
     public void setQuoteVolume(BigDecimal quoteVolume) {
         this.quoteVolume = quoteVolume;
+    }
+
+    public Integer getCandlePeriod() {
+        return candlePeriod;
+    }
+
+    public void setCandlePeriod(Integer candlePeriod) {
+        this.candlePeriod = candlePeriod;
     }
 
     @Override
