@@ -89,6 +89,9 @@ public class IndicatorCalculator {
             case MOMENTUM:
                 indicatorLogic = new MomentumIndicatorLogic(params);
                 break;
+            case EMA_VOLUME:
+                indicatorLogic = new VolumeExponentialMovingAverageIndicatorLogic(params);
+                break;
             default:
                 return null;
         }
