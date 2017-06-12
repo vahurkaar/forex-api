@@ -92,6 +92,9 @@ public class IndicatorCalculator {
             case EMA_VOLUME:
                 indicatorLogic = new VolumeExponentialMovingAverageIndicatorLogic(params);
                 break;
+            case VOLUME_CHANGE:
+                indicatorLogic = new VolumeChangeIndicator(params);
+                break;
             default:
                 return null;
         }

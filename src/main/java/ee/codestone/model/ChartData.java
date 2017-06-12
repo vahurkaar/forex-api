@@ -12,6 +12,7 @@ import java.util.Map;
 public class ChartData {
 
     private PriceData priceData;
+    private PriceData heikenAshiPriceData;
     private List<IndicatorValue> indicators;
     private Map<String, BigDecimal> markers;
 
@@ -54,6 +55,14 @@ public class ChartData {
 
     public void setMarkers(Map<String, BigDecimal> markers) {
         this.markers = markers;
+    }
+
+    public PriceData getHeikenAshiPriceData() {
+        return heikenAshiPriceData;
+    }
+
+    public void setHeikenAshiPriceData(PriceData heikenAshiPriceData) {
+        this.heikenAshiPriceData = heikenAshiPriceData;
     }
 
     @Override
