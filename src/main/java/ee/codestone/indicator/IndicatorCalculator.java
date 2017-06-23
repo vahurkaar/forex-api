@@ -95,6 +95,9 @@ public class IndicatorCalculator {
             case VOLUME_CHANGE:
                 indicatorLogic = new VolumeChangeIndicator(params);
                 break;
+            case VOLUME_SUM:
+                indicatorLogic = new VolumeSumIndicatorLogic(params);
+                break;
             default:
                 return null;
         }
