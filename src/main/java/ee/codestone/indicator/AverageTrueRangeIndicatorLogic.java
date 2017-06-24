@@ -8,7 +8,6 @@ import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.Queue;
 
 /**
  * Created by vahurkaar on 5.10.16.
@@ -19,6 +18,7 @@ public class AverageTrueRangeIndicatorLogic extends IndicatorLogic {
 
 	private LinkedList<BigDecimal> trueRangeHistory = new LinkedList<>();
 	private LinkedList<PriceData> history = new LinkedList<>();
+	private BigDecimal previousPreviousAverageTrueRange = null;
 	private BigDecimal previousAverageTrueRange = null;
 
 	public AverageTrueRangeIndicatorLogic(Map<String, BigDecimal> params) {
@@ -38,6 +38,9 @@ public class AverageTrueRangeIndicatorLogic extends IndicatorLogic {
 		BigDecimal trueRange = calculateTrueRange(priceData);
 		addTrueRangeToHistory(trueRange, recalculate);
 		addForexDataToHistory(priceData, recalculate);
+		if (recalculate) {
+			previousAverageTrueRange = previousPreviousAverageTrueRange;
+		}
 
 		if (history.size() < period) {
 			result.put("value", null);
@@ -52,6 +55,7 @@ public class AverageTrueRangeIndicatorLogic extends IndicatorLogic {
 					.divide(new BigDecimal(period), precision, RoundingMode.HALF_UP);
 		}
 
+		previousPreviousAverageTrueRange = previousAverageTrueRange;
 		previousAverageTrueRange = averageTrueRange;
 		result.put("value", averageTrueRange);
 		return result;
