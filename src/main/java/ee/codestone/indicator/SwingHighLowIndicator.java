@@ -68,8 +68,12 @@ public class SwingHighLowIndicator extends IndicatorLogic {
                 isLowestLow &= low.compareTo(l) <= 0;
             }
 
-            if (isHighestHigh) indicatorValue.getValues().put("swingHigh", indicatorValue.getValues().get("high"));
-            if (isLowestLow) indicatorValue.getValues().put("swingLow", indicatorValue.getValues().get("low"));
+            if (isHighestHigh || isLowestLow) {
+                for (IndicatorValue cachedIndicatorValue : cache) {
+                    if (isHighestHigh) cachedIndicatorValue.getValues().put("swingHigh", indicatorValue.getValues().get("high"));
+                    if (isLowestLow) cachedIndicatorValue.getValues().put("swingLow", indicatorValue.getValues().get("low"));
+                }
+            }
 
             lastIndicatorValue = indicatorValue;
         }
