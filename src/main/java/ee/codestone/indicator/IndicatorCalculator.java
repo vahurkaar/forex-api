@@ -98,6 +98,9 @@ public class IndicatorCalculator {
             case VOLUME_SUM:
                 indicatorLogic = new VolumeSumIndicatorLogic(params);
                 break;
+            case SWING_HIGH_LOW:
+                indicatorLogic = new SwingHighLowIndicator(params);
+                break;
             default:
                 return null;
         }
