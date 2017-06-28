@@ -31,7 +31,7 @@ public class GrimesEfficiencyRatioIndicatorLogic extends IndicatorLogic {
     }
 
     @Override
-    public Map<String, BigDecimal> calculate(PriceData priceData, Integer precision, boolean recalculate) {
+    public Map<String, BigDecimal> calculateValues(PriceData priceData, Integer precision, boolean recalculate) {
         addDataToHistory(priceData, recalculate);
 
         Map<String, BigDecimal> result = new HashMap<>();
@@ -56,7 +56,7 @@ public class GrimesEfficiencyRatioIndicatorLogic extends IndicatorLogic {
 
         BigDecimal range = highest.subtract(lowest);
 
-        // iff(rng > 0,((c - lowest(l, lookback)) / rng), 0); //calculate close as % of range, catch divide by zero error
+        // iff(rng > 0,((c - lowest(l, lookback)) / rng), 0); //calculateValues close as % of range, catch divide by zero error
         BigDecimal change = BigDecimal.ZERO;
         if (range.compareTo(BigDecimal.ZERO) > 0) {
             change = priceData.getClose().subtract(lowest).divide(range, precision, RoundingMode.HALF_UP);

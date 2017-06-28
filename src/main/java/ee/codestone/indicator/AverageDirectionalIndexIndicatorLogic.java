@@ -41,7 +41,7 @@ public class AverageDirectionalIndexIndicatorLogic extends IndicatorLogic {
 	}
 
 	@Override
-	public Map<String, BigDecimal> calculate(PriceData priceData, Integer precision, boolean recalculate) {
+	public Map<String, BigDecimal> calculateValues(PriceData priceData, Integer precision, boolean recalculate) {
         if (forexDataHistory.isEmpty()) {
             addForexDataToHistory(priceData, recalculate);
             return prepareResult(null, null, null, precision);
@@ -57,7 +57,7 @@ public class AverageDirectionalIndexIndicatorLogic extends IndicatorLogic {
 		BigDecimal averageDmPlus = calculateAverageDm(dmPlus, precision, 1, recalculate);
 		BigDecimal averageDmMinus = calculateAverageDm(dmMinus, precision, -1, recalculate);
 
-        BigDecimal averageTrueRange = averageTrueRangeIndicator.calculate(priceData, precision * 2, recalculate).get("value");
+        BigDecimal averageTrueRange = averageTrueRangeIndicator.calculateValues(priceData, precision * 2, recalculate).get("value");
         if (averageTrueRange == null) {
             addForexDataToHistory(priceData, recalculate);
             return prepareResult(null, null, null, precision);

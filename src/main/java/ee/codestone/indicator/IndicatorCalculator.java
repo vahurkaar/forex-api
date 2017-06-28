@@ -113,7 +113,7 @@ public class IndicatorCalculator {
     public ChartData calculate(PriceData priceData, boolean recalculate) {
         List<IndicatorValue> calculatedIndicators = new ArrayList<>();
         indicatorLogics.forEach(indicatorLogic -> calculatedIndicators.add(
-                new IndicatorValue(indicatorLogic.getType(), indicatorLogic.getGroupId(), indicatorLogic.calculate(priceData, precision, recalculate))));
+                indicatorLogic.calculate(priceData, precision, recalculate)));
 
         return new ChartData(priceData, calculatedIndicators);
     }

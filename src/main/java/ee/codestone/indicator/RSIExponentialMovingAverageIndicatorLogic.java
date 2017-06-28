@@ -29,7 +29,7 @@ public class RSIExponentialMovingAverageIndicatorLogic extends ExponentialMoving
 
     @Override
     protected BigDecimal getValue(PriceData priceData, Integer precision, boolean recalculate) {
-        Map<String, BigDecimal> rsiValues = relativeStrengthIndexIndicatorLogic.calculate(priceData, precision, recalculate);
+        Map<String, BigDecimal> rsiValues = relativeStrengthIndexIndicatorLogic.calculateValues(priceData, precision, recalculate);
         return rsiValues.get("value");
     }
 }

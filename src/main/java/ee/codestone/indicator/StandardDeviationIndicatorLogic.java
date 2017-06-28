@@ -29,7 +29,7 @@ public class StandardDeviationIndicatorLogic extends IndicatorLogic {
     }
 
     @Override
-    public Map<String, BigDecimal> calculate(PriceData priceData, Integer precision, boolean recalculate) {
+    public Map<String, BigDecimal> calculateValues(PriceData priceData, Integer precision, boolean recalculate) {
         if (recalculate) history.pollLast();
         history.addLast(priceData);
         if (history.size() > period) {

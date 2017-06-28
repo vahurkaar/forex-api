@@ -1,5 +1,6 @@
 package ee.codestone.indicator;
 
+import ee.codestone.model.IndicatorValue;
 import ee.codestone.model.PriceData;
 import ee.codestone.model.type.IndicatorType;
 
@@ -22,7 +23,11 @@ public abstract class IndicatorLogic {
 
     public abstract IndicatorType getType();
 
-    public abstract Map<String, BigDecimal> calculate(PriceData chartData, Integer precision, boolean recalculate);
+    public abstract Map<String, BigDecimal> calculateValues(PriceData chartData, Integer precision, boolean recalculate);
+
+    public IndicatorValue calculate(PriceData chartData, Integer precision, boolean recalculate) {
+        return new IndicatorValue(getType(), groupId, calculateValues(chartData, precision, recalculate));
+    }
 
     public Integer getGroupId() {
         return groupId;

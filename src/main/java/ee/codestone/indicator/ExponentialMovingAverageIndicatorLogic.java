@@ -29,9 +29,9 @@ public class ExponentialMovingAverageIndicatorLogic extends SimpleMovingAverageI
     }
 
     @Override
-    public Map<String, BigDecimal> calculate(PriceData priceData, Integer precision, boolean recalculate) {
+    public Map<String, BigDecimal> calculateValues(PriceData priceData, Integer precision, boolean recalculate) {
         if (previous == null) {
-            Map<String, BigDecimal> result = super.calculate(priceData, precision, recalculate);
+            Map<String, BigDecimal> result = super.calculateValues(priceData, precision, recalculate);
             if (result.get("value") != null) {
                 previous = result.get("value");
             }

@@ -32,9 +32,9 @@ public class BollingerBandsIndicatorLogic extends IndicatorLogic {
     }
 
     @Override
-    public Map<String, BigDecimal> calculate(PriceData priceData, Integer precision, boolean recalculate) {
-        BigDecimal standardDeviationValue = standardDeviation.calculate(priceData, precision * 2, recalculate).get("value");
-        BigDecimal middleValue = simpleMovingAverage.calculate(priceData, precision, recalculate).get("value");
+    public Map<String, BigDecimal> calculateValues(PriceData priceData, Integer precision, boolean recalculate) {
+        BigDecimal standardDeviationValue = standardDeviation.calculateValues(priceData, precision * 2, recalculate).get("value");
+        BigDecimal middleValue = simpleMovingAverage.calculateValues(priceData, precision, recalculate).get("value");
         BigDecimal upperValue = null;
         BigDecimal lowerValue = null;
 

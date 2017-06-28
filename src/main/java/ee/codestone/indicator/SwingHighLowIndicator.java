@@ -8,25 +8,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static ee.codestone.model.type.IndicatorType.PRICE;
-import static ee.codestone.model.type.IndicatorType.VOLUME;
 
 /**
  * Created by vahurkaar on 30.09.16.
  */
-public class VolumeIndicatorLogic extends IndicatorLogic {
-    public VolumeIndicatorLogic(Map<String, BigDecimal> params) {
+public class SwingHighLowIndicator extends IndicatorLogic {
+    public SwingHighLowIndicator(Map<String, BigDecimal> params) {
         super(params);
     }
 
     @Override
     public IndicatorType getType() {
-        return VOLUME;
+        return PRICE;
     }
 
     @Override
     public Map<String, BigDecimal> calculateValues(PriceData priceData, Integer precision, boolean recalculate) {
         Map<String, BigDecimal> result = new HashMap<>();
-        result.put("value", priceData.getVolume());
+        result.put("high", priceData.getClose());
+        result.put("low", priceData.getClose());
         return result;
     }
 }

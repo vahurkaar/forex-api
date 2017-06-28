@@ -35,9 +35,9 @@ public class AwesomeOscillatorIndicatorLogic extends IndicatorLogic {
     }
 
     @Override
-    public Map<String, BigDecimal> calculate(PriceData priceData, Integer precision, boolean recalculate) {
-        BigDecimal shortValue = shortPeriodIndicator.calculate(priceData, precision, recalculate).get("value");
-        BigDecimal longValue = longPeriodIndicator.calculate(priceData, precision, recalculate).get("value");
+    public Map<String, BigDecimal> calculateValues(PriceData priceData, Integer precision, boolean recalculate) {
+        BigDecimal shortValue = shortPeriodIndicator.calculateValues(priceData, precision, recalculate).get("value");
+        BigDecimal longValue = longPeriodIndicator.calculateValues(priceData, precision, recalculate).get("value");
 
         Map<String, BigDecimal> result = new HashMap<>();
         if (shortValue != null && longValue != null) {

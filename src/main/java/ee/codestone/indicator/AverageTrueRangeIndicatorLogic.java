@@ -32,7 +32,7 @@ public class AverageTrueRangeIndicatorLogic extends IndicatorLogic {
 	}
 
 	@Override
-	public Map<String, BigDecimal> calculate(PriceData priceData, Integer precision, boolean recalculate) {
+	public Map<String, BigDecimal> calculateValues(PriceData priceData, Integer precision, boolean recalculate) {
 		Map<String, BigDecimal> result = new HashMap<>();
 
 		BigDecimal trueRange = calculateTrueRange(priceData);

@@ -33,7 +33,7 @@ public class RelativeStrengthIndexIndicatorLogic extends IndicatorLogic {
     }
 
     @Override
-    public Map<String, BigDecimal> calculate(PriceData priceData, Integer precision, boolean recalulcate) {
+    public Map<String, BigDecimal> calculateValues(PriceData priceData, Integer precision, boolean recalulcate) {
         Map<String, BigDecimal> result = new HashMap<>();
         if (history.size() < period) {
             addDataToHistory(priceData);
