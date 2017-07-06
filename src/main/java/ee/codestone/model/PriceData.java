@@ -31,6 +31,14 @@ public class PriceData implements Serializable {
     private BigDecimal quoteVolume;
     private Integer candlePeriod;
 
+    public boolean isBullish() {
+        return getOpen().compareTo(getClose()) < 0;
+    }
+
+    public boolean isBearish() {
+        return getOpen().compareTo(getClose()) > 0;
+    }
+
     public Timestamp getDate() {
         return date;
     }
