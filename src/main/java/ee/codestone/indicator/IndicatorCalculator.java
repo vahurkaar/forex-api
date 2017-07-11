@@ -101,6 +101,9 @@ public class IndicatorCalculator {
             case SWING_HIGH_LOW:
                 indicatorLogic = new SwingHighLowIndicator(params);
                 break;
+            case BREAKOUT:
+                indicatorLogic = new BreakoutChannelIndicatorLogic(params);
+                break;
             default:
                 return null;
         }
