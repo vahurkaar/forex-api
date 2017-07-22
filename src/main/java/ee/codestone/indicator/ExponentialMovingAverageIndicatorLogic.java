@@ -18,6 +18,7 @@ import java.util.Map;
 public class ExponentialMovingAverageIndicatorLogic extends SimpleMovingAverageIndicatorLogic {
 
     private BigDecimal previous;
+    private BigDecimal previousPrevious;
 
     public ExponentialMovingAverageIndicatorLogic(Map<String, BigDecimal> params) {
         super(params);
@@ -30,6 +31,8 @@ public class ExponentialMovingAverageIndicatorLogic extends SimpleMovingAverageI
 
     @Override
     public Map<String, BigDecimal> calculateValues(PriceData priceData, Integer precision, boolean recalculate) {
+        if (recalculate) previous = previousPrevious;
+
         if (previous == null) {
             Map<String, BigDecimal> result = super.calculateValues(priceData, precision, recalculate);
             if (result.get("value") != null) {
@@ -43,6 +46,7 @@ public class ExponentialMovingAverageIndicatorLogic extends SimpleMovingAverageI
                 precision, BigDecimal.ROUND_HALF_UP);
         BigDecimal resultValue = getValue(priceData, precision, recalculate).subtract(previous).multiply(multiplier).add(previous)
                 .setScale(precision, BigDecimal.ROUND_HALF_UP);
+        previousPrevious = previous;
         previous = resultValue;
 
         Map<String, BigDecimal> result = new HashMap<>();

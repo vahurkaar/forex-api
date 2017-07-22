@@ -104,6 +104,9 @@ public class IndicatorCalculator {
             case BREAKOUT:
                 indicatorLogic = new BreakoutChannelIndicatorLogic(params);
                 break;
+            case MFI:
+                indicatorLogic = new MoneyFlowIndexIndicatorLogic(params);
+                break;
             default:
                 return null;
         }

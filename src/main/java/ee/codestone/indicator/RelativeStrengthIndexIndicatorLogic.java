@@ -17,10 +17,13 @@ public class RelativeStrengthIndexIndicatorLogic extends IndicatorLogic {
     private final Integer period;
 
     private LinkedList<PriceData> history = new LinkedList<>();
+    private PriceData previousRemovedHistoryItem;
 
     private BigDecimal previousAverageGain;
+    private BigDecimal previousPreviousAverageGain;
 
     private BigDecimal previousAverageLoss;
+    private BigDecimal previousPreviousAverageLoss;
 
     public RelativeStrengthIndexIndicatorLogic(Map<String, BigDecimal> params) {
         super(params);
@@ -33,8 +36,15 @@ public class RelativeStrengthIndexIndicatorLogic extends IndicatorLogic {
     }
 
     @Override
-    public Map<String, BigDecimal> calculateValues(PriceData priceData, Integer precision, boolean recalulcate) {
+    public Map<String, BigDecimal> calculateValues(PriceData priceData, Integer precision, boolean recalculate) {
         Map<String, BigDecimal> result = new HashMap<>();
+        if (recalculate) {
+            history.pollLast();
+            previousAverageLoss = previousPreviousAverageLoss;
+            previousAverageGain = previousPreviousAverageGain;
+            if (previousRemovedHistoryItem != null) history.addFirst(previousRemovedHistoryItem);
+        }
+
         if (history.size() < period) {
             addDataToHistory(priceData);
             result.put("value", null);
@@ -66,7 +76,9 @@ public class RelativeStrengthIndexIndicatorLogic extends IndicatorLogic {
             averageLoss = averageLoss.divide(BigDecimal.valueOf(period), precision * 2, BigDecimal.ROUND_HALF_UP);
         }
 
+        previousPreviousAverageGain = previousAverageGain;
         previousAverageGain = averageGain;
+        previousPreviousAverageLoss = previousAverageLoss;
         previousAverageLoss = averageLoss;
 
         BigDecimal resultValue = null;
@@ -88,7 +100,7 @@ public class RelativeStrengthIndexIndicatorLogic extends IndicatorLogic {
     private void addDataToHistory(PriceData forexData) {
         history.offerLast(forexData);
         if (history.size() > period) {
-            history.pollFirst();
+            previousRemovedHistoryItem = history.pollFirst();
         }
     }
 
