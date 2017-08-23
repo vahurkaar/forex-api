@@ -48,7 +48,9 @@ public class VolumeSumIndicatorLogic extends IndicatorLogic {
         BigDecimal sum = BigDecimal.ZERO;
 
         for (BigDecimal volume : history) {
-            sum = sum.add(volume);
+            if (volume != null) {
+                sum = sum.add(volume);
+            }
         }
 
         return sum.setScale(precision, RoundingMode.HALF_UP);

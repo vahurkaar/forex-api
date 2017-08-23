@@ -61,7 +61,7 @@ public class MoneyFlowIndexIndicatorLogic extends IndicatorLogic {
             BigDecimal rawMoneyFlow = calculateRawMoneyFlow(priceData, precision);
             if (previousPriceData.getClose().compareTo(priceData.getClose()) < 0) {
                 positiveMoneyFlow = positiveMoneyFlow.add(rawMoneyFlow);
-            } else {
+            } else if (previousPriceData.getClose().compareTo(priceData.getClose()) > 0) {
                 negativeMoneyFlow = negativeMoneyFlow.add(rawMoneyFlow);
             }
         }
