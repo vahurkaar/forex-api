@@ -70,8 +70,13 @@ public class SwingHighLowIndicator extends IndicatorLogic {
 
             if (isHighestHigh || isLowestLow) {
                 for (IndicatorValue cachedIndicatorValue : cache) {
-                    if (isHighestHigh) cachedIndicatorValue.getValues().put("swingHigh", indicatorValue.getValues().get("high"));
-                    if (isLowestLow) cachedIndicatorValue.getValues().put("swingLow", indicatorValue.getValues().get("low"));
+                    if (indicatorValue.getValues().get("date").compareTo(cachedIndicatorValue.getValues().get("date")) <= 0) {
+                        if (isHighestHigh)
+                            cachedIndicatorValue.getValues().put("swingHigh", indicatorValue.getValues().get("high"));
+                        if (isLowestLow)
+                            cachedIndicatorValue.getValues().put("swingLow", indicatorValue.getValues().get("low"));
+                        cachedIndicatorValue.getValues().put("swingDate", indicatorValue.getValues().get("date"));
+                    }
                 }
             }
 
@@ -85,6 +90,7 @@ public class SwingHighLowIndicator extends IndicatorLogic {
             if (lastIndicatorValue != null) {
                 lastIndicatorValue.getValues().remove("swingHigh");
                 lastIndicatorValue.getValues().remove("swingLow");
+                lastIndicatorValue.getValues().remove("swingDate");
             }
         }
 
