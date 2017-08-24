@@ -35,10 +35,10 @@ public abstract class ChangeIndicator extends IndicatorLogic {
         }
 
         if (priceHistory.size() == period) {
-            BigDecimal periodVolume = calculateValue(precision);
+            BigDecimal periodValue = calculateValue(priceData, precision);
 
             if (recalculate) valueHistory.pollLast();
-            valueHistory.addLast(periodVolume);
+            valueHistory.addLast(periodValue);
             if (valueHistory.size() > period) {
                 valueHistory.pollFirst();
             }
@@ -62,7 +62,7 @@ public abstract class ChangeIndicator extends IndicatorLogic {
         return value;
     }
 
-    protected abstract BigDecimal calculateValue(Integer precision);
+    protected abstract BigDecimal calculateValue(PriceData priceData, Integer precision);
 
     protected abstract BigDecimal getValue(PriceData priceData);
 }

@@ -28,10 +28,10 @@ public class VolumeChangeIndicator extends ChangeIndicator {
     }
 
     @Override
-    protected BigDecimal calculateValue(Integer precision) {
+    protected BigDecimal calculateValue(PriceData priceData, Integer precision) {
         BigDecimal sum = BigDecimal.ZERO;
-        for (PriceData priceData : priceHistory) {
-            sum = sum.add(getValue(priceData));
+        for (PriceData p : priceHistory) {
+            sum = sum.add(getValue(p));
         }
 
         return sum.setScale(precision, RoundingMode.HALF_UP);

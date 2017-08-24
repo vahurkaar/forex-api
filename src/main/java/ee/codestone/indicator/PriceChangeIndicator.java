@@ -19,21 +19,16 @@ public class PriceChangeIndicator extends ChangeIndicator {
 
     @Override
     public IndicatorType getType() {
-        return IndicatorType.VOLUME_CHANGE;
+        return IndicatorType.PRICE_CHANGE;
     }
 
     @Override
     protected BigDecimal getValue(PriceData priceData) {
-        return priceData.getVolume();
+        return priceData.getClose();
     }
 
     @Override
-    protected BigDecimal calculateValue(Integer precision) {
-        BigDecimal sum = BigDecimal.ZERO;
-        for (PriceData priceData : priceHistory) {
-            sum = sum.add(getValue(priceData));
-        }
-
-        return sum.setScale(precision, RoundingMode.HALF_UP);
+    protected BigDecimal calculateValue(PriceData priceData, Integer precision) {
+        return priceData.getClose();
     }
 }
